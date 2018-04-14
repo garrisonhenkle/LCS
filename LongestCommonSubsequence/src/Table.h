@@ -16,14 +16,23 @@ using namespace std;
 class Table {
 public:
 	Table(string, string, string);
-	Table(int, int, string, string);
 	virtual ~Table();
+
+	void setCount(int, int, int);
+	int getCount(int, int);
+
+	void setDir(int, int, int);
+	int getDir(int, int);
+
+	void populate(int, int, int, int);
 private:
 	string wOne;
 	string wTwo;
 	int width;
 	int height;
-	pair<string, int>[][] data;
+	int tableHeight;
+	int * count[][];
+	int * backtrack[][];
 };
 
 #endif /* TABLE_H_ */
