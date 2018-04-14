@@ -6,6 +6,7 @@
  */
 
 #include "Table.h"
+#include <iostream>
 
 Table::Table(string wordOne, string wordTwo, string mode) {
 
@@ -85,7 +86,7 @@ int Table::getWidth(){
 }
 
 int Table::getHeight(){
-	return height;
+	return tableHeight;
 }
 
 string Table::getOne(){

@@ -158,7 +158,6 @@ string LCS::getLCS(Table * t, string wordOne) {
 			//if the direction is up
 		} else if (dirVal == 3) {
 
-
 			//adjust the position variables
 			yLoc--;
 
@@ -176,6 +175,8 @@ string LCS::getLCS(Table * t, string wordOne) {
 
 void LCS::populateSwap(Table * t, string wordOne, string wordTwo) {
 
+	LCS * lcs2 = new LCS();
+
 	int swapHeight = wordTwo.length();
 
 	for (int j = 0; j < swapHeight; j++) {
@@ -186,12 +187,15 @@ void LCS::populateSwap(Table * t, string wordOne, string wordTwo) {
 		}
 
 		//write the new line over the data in row 1
-		populateLine(t, wordOne, wordTwo, 1, j);
+		populateLine(t, wordOne, wordTwo, 1, j); //maybe j + 1 **********************
 	}
+
+	delete lcs2;
 
 } //end populateSwap
 
 int LCS::getLCSLength(Table * t) {
+
 	return t->getCount(t->getWidth() - 1, t->getHeight() - 1);
 } // end getLCSLength
 
@@ -207,7 +211,7 @@ void LCS::populateLine(Table * t, string wordOne, string wordTwo, int tableLine,
 //go through every character on the line
 	for (int i = 1; i < t->getWidth(); i++) {
 
-		currXChar = wordOne[i - 1];
+		currXChar = wordOne[i];
 		currYChar = wordTwo[wordLine]; //check this later ****************************************************
 
 		//if the characters are the same, set the count to the diagonal + 1
