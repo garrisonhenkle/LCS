@@ -71,3 +71,11 @@ void Table::populate(int x, int y, int countVal, int dirVal) {
 	backtrack[x][y] = dirVal;
 
 }
+
+int Table::getWidth(){
+	return width;
+}
+
+int Table::getHeight(){
+	return height;
+}

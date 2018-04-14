@@ -25,6 +25,9 @@ public:
 	int getDir(int, int);
 
 	void populate(int, int, int, int);
+
+	int getWidth();
+	int getHeight();
 private:
 	string wOne;
 	string wTwo;

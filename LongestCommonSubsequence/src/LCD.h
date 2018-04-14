@@ -9,11 +9,11 @@
 #define LCD_H_
 
 #include "Table.h";
+#include <iostream>;
 
 class LCD {
 public:
-	LCD();
-	virtual ~LCD();
+
 };
 
 #endif /* LCD_H_ */
