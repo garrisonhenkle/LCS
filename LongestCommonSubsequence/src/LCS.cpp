@@ -3,6 +3,7 @@
  *
  *  Created on: Apr 12, 2018
  *      Author: Garrison Henkle
+ *
  */
 
 //Note about the direction matrix:
@@ -17,6 +18,7 @@
 // c is the current cell
 #include "LCS.h"
 
+//gets the input from the command line and runs the program
 int main(int argc, char* argv[]) {
 
 	//holds the two sequences to be compared
@@ -69,6 +71,7 @@ int main(int argc, char* argv[]) {
 	return 0;
 } //end main
 
+//see header file
 void LCS::populateMatrix(Table * t, string wordOne, string wordTwo) {
 
 	//holds the current characters being compared
@@ -131,6 +134,7 @@ void LCS::populateMatrix(Table * t, string wordOne, string wordTwo) {
 
 } //end populateMatrix
 
+//see header file
 string LCS::getLCS(Table * t, string wordOne) {
 
 	string out = "";
@@ -173,6 +177,7 @@ string LCS::getLCS(Table * t, string wordOne) {
 	return out;
 } //end getLCS
 
+//see header file
 void LCS::populateSwap(Table * t, string wordOne, string wordTwo) {
 
 	LCS * lcs2 = new LCS();
@@ -194,21 +199,23 @@ void LCS::populateSwap(Table * t, string wordOne, string wordTwo) {
 
 } //end populateSwap
 
+//see header file
 int LCS::getLCSLength(Table * t) {
 
 	return t->getCount(t->getWidth() - 1, t->getHeight() - 1);
 } // end getLCSLength
 
+//see header file
 void LCS::populateLine(Table * t, string wordOne, string wordTwo, int tableLine,
 		int wordLine) {
 
-//holds the current characters being compared
+	//holds the current characters being compared
 	char currXChar; //horizontal / x axis
 	char currYChar; //vertical / y axis
 
 	int countVal;
 
-//go through every character on the line
+	//go through every character on the line
 	for (int i = 1; i < t->getWidth(); i++) {
 
 		currXChar = wordOne[i];
