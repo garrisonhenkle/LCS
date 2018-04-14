@@ -8,8 +8,8 @@
 #ifndef TABLE_H_
 #define TABLE_H_
 
-#include <string>;
-#include <vector>;
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -37,8 +37,8 @@ private:
 	int width;
 	int height;
 	int tableHeight;
-	int * count[][];
-	int * backtrack[][];
+	int ** count;
+	int ** backtrack;
 };
 
 #endif /* TABLE_H_ */

@@ -24,10 +24,10 @@ int main(int argc, char* argv[]) {
 	string two;
 
 	//if there is two command line arguments, assign them to be the strings
-	if (argc == 2) {
-		one = argv[0];
-		two = argv[1];
-		//if argc != 2, then give an error and exit
+	if (argc == 3) {
+		one = argv[1];
+		two = argv[2];
+		//if argc != 3, then give an error and exit
 	} else {
 		cerr << "Invalid amount of arguments.  Please see the readme.txt"
 				<< endl;
@@ -83,11 +83,8 @@ void LCS::populateMatrix(Table * t, string wordOne, string wordTwo) {
 
 			//set the current characters that are being compared
 
-			//since the for loops start at 1 to account for the extra space
-			//character added to the front of each word, the currChar variables
-			//must be set to the i-1 or j-1 character of the word
-			currXChar = wordOne[i - 1];
-			currYChar = wordTwo[j - 1];
+			currXChar = wordOne[i];
+			currYChar = wordTwo[j];
 
 			//if the characters are the same, set the count to the diagonal + 1
 			//and the direction to diagonal
@@ -131,6 +128,7 @@ void LCS::populateMatrix(Table * t, string wordOne, string wordTwo) {
 
 		} //end for horizontal
 	} //end for vertical
+
 } //end populateMatrix
 
 string LCS::getLCS(Table * t, string wordOne) {
@@ -142,7 +140,7 @@ string LCS::getLCS(Table * t, string wordOne) {
 	int yLoc = t->getHeight() - 1;
 
 	//get the longest common subsequence from the matrix
-	while (xLoc != 0 || yLoc != 0) {
+	while (t->getCount(xLoc, yLoc) != 0) {
 
 		//get the direction of the current cell
 		int dirVal = t->getDir(xLoc, yLoc);
@@ -151,7 +149,7 @@ string LCS::getLCS(Table * t, string wordOne) {
 		if (dirVal == 2) {
 
 			//push the letter to the front
-			out = wordOne[xLoc - 1] + out;
+			out = wordOne[xLoc] + out;
 
 			//adjust the position variables
 			xLoc--;
@@ -159,6 +157,7 @@ string LCS::getLCS(Table * t, string wordOne) {
 
 			//if the direction is up
 		} else if (dirVal == 3) {
+
 
 			//adjust the position variables
 			yLoc--;
@@ -169,6 +168,7 @@ string LCS::getLCS(Table * t, string wordOne) {
 			//adjust the position variables
 			xLoc--;
 		}
+
 	} //end while
 
 	return out;

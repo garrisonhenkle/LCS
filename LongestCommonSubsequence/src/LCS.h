@@ -8,8 +8,8 @@
 #ifndef LCS_H_
 #define LCS_H_
 
-#include "Table.h";
-#include <iostream>;
+#include "Table.h"
+#include <iostream>
 
 class LCS {
 public:

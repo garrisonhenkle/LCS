@@ -6,7 +6,6 @@
  */
 
 #include "Table.h"
-#include <vector>;
 
 Table::Table(string wordOne, string wordTwo, string mode) {
 
@@ -23,8 +22,17 @@ Table::Table(string wordOne, string wordTwo, string mode) {
 	}
 
 	//set the two 2D arrays to the correct dimensions
-	count = new int[width][tableHeight];
-	backtrack = new int[width][tableHeight];
+	count = new int*[width];
+
+	for(int i=0 ; i < width ; i++){
+		count[i] = new int[tableHeight];
+	}
+
+	backtrack = new int*[width];
+
+	for(int i=0 ; i < width ; i++){
+		backtrack[i] = new int[tableHeight];
+	}
 
 	//initialize the tables to zeros
 	for (int i = 0; i < width; i++) {
