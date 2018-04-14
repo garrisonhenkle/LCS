@@ -1,19 +1,20 @@
 /*
- * LCD.h
+ * LCS.h
  *
  *  Created on: Apr 12, 2018
  *      Author: Garrison Henkle
  */
 
-#ifndef LCD_H_
-#define LCD_H_
+#ifndef LCS_H_
+#define LCS_H_
 
 #include "Table.h";
 #include <iostream>;
 
-class LCD {
+class LCS {
 public:
-
+	void populateMatrix(Table&);
+	string getLCS(Table&);
 };
 
-#endif /* LCD_H_ */
+#endif /* LCS_H_ */

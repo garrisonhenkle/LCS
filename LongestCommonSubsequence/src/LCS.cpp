@@ -1,11 +1,11 @@
 /*
- * LCD.cpp
+ * LCS.cpp
  *
  *  Created on: Apr 12, 2018
  *      Author: Garrison Henkle
  */
 
-#include "LCD.h"
+#include "LCS.h"
 
 int main(int argc, char* argv[]) {
 
@@ -26,6 +26,9 @@ int main(int argc, char* argv[]) {
 	//holds the count of a cell
 	int countVal;
 
+	//holds the direction of a cell
+	int dirVal;
+
 	//if there is two command line arguments, assign them to be the strings
 	if (argc == 2) {
 		one = argv[0];
@@ -41,10 +44,6 @@ int main(int argc, char* argv[]) {
 	Table * matrix = new Table(one, two, "matrix");
 	Table * swap = new Table(one, two, "swap");
 
-	//
-	//Get the longest common subsequence using the matrix
-	//
-
 	//Note about the direction matrix:
 	//The direction is given by a value from 1-3
 	//1 is left, 2 is the upper left diagonal, and 3 is up
@@ -55,6 +54,10 @@ int main(int argc, char* argv[]) {
 	//-------------
 	//
 	// c is the current cell
+
+	//
+	//Get the longest common subsequence using the matrix
+	//
 
 	for (int j = 1; j < matrix->getHeight(); j++) {
 
@@ -109,8 +112,45 @@ int main(int argc, char* argv[]) {
 				matrix->setDir(i, j, 1);
 			}
 
+		} //end for horizontal
+	} //end for vertical
+
+	//current pointer position
+	int xLoc = matrix->getWidth() - 1;
+	int yLoc = matrix->getHeight() - 1;
+
+	//get the longest common subsequence from the matrix
+	while(xLoc != 0 || yLoc != 0){
+
+		//get the direction of the current cell
+		dirVal = matrix->getDir(xLoc, yLoc);
+
+		//if the direction is diagonal
+		if(dirVal == 2){
+
+			//push the letter to the front
+			LCSeq = one[xLoc-1] + LCSeq;
+
+			//adjust the position variables
+			xLoc--;
+			yLoc--;
+
+			//if the direction is up
+		} else if(dirVal == 3){
+
+			//adjust the position variables
+			yLoc--;
+
+			//if the direction is left
+		} else if(dirVal == 1){
+
+			//adjust the position variables
+			xLoc--;
 		}
-	}
+	} //end while
+
+	//print the longest common subsequence
+	cout << LCSeq << endl;
 
 	//
 	//Get the length of the longest common subsequence using the swap table
@@ -122,3 +162,11 @@ int main(int argc, char* argv[]) {
 
 	return 0;
 } //end main
+
+void LCS::populateMatrix(Table & t){
+
+} //end populateMatrix
+
+string LCS::getLCS(Table & t){
+
+} //end getLCS
