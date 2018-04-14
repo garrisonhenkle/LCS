@@ -28,6 +28,9 @@ public:
 
 	int getWidth();
 	int getHeight();
+
+	string getOne();
+	string getTwo();
 private:
 	string wOne;
 	string wTwo;

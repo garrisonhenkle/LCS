@@ -18,6 +18,8 @@ public:
 
 	void populateSwap(Table*, string, string);
 	int getLCSLength(Table*);
+
+	void populateLine(Table*, string, string, int, int);
 };
 
 #endif /* LCS_H_ */

@@ -79,3 +79,11 @@ int Table::getWidth(){
 int Table::getHeight(){
 	return height;
 }
+
+string Table::getOne(){
+	return wOne;
+}
+
+string Table::getTwo(){
+	return wTwo;
+}

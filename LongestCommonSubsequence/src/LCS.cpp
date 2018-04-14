@@ -47,9 +47,9 @@ int main(int argc, char* argv[]) {
 	//
 
 	//populate the matrix
-	lcs->populateMatrix(matrix, one, two);
+	lcs->populateMatrix(matrix, matrix->getOne(), matrix->getTwo());
 	//print the longest common subsequence
-	cout << lcs->getLCS(matrix, one) << endl;
+	cout << lcs->getLCS(matrix, matrix->getOne()) << endl;
 
 	//
 	//get the length of the longest common subsequence
@@ -57,9 +57,9 @@ int main(int argc, char* argv[]) {
 	//
 
 	//populate the swap
-	lcs->populateSwap(swap, one, two);
+	lcs->populateSwap(swap, swap->getOne(), swap->getTwo());
 	//print the length of the longest common subsequence
-	lcs->getLCSLength(swap);
+	cout << lcs->getLCSLength(swap) << endl;
 
 	//delete the matrix, the swap table, and the LCS object
 	delete matrix;
@@ -176,15 +176,82 @@ string LCS::getLCS(Table * t, string wordOne) {
 
 void LCS::populateSwap(Table * t, string wordOne, string wordTwo) {
 
-	//holds the current characters being compared
-	char currXChar; //horizontal / x axis
-	char currYChar; //vertical / y axis
+	int swapHeight = wordTwo.length();
 
-	//holds the current count value
-	int countVal;
+	for (int j = 0; j < swapHeight; j++) {
 
-	for (int j = 1; j < wordTwo.length() + 1; j++) {
+		//move the bottom row to the top (store row 1 in row 0)
+		for (int i = 0; i < t->getWidth(); i++) {
+			t->setCount(i, 0, t->getCount(i, 1));
+		}
 
+		//write the new line over the data in row 1
+		populateLine(t, wordOne, wordTwo, 1, j);
 	}
 
 } //end populateSwap
+
+int LCS::getLCSLength(Table * t) {
+	return t->getCount(t->getWidth() - 1, t->getHeight() - 1);
+} // end getLCSLength
+
+void LCS::populateLine(Table * t, string wordOne, string wordTwo, int tableLine,
+		int wordLine) {
+
+//holds the current characters being compared
+	char currXChar; //horizontal / x axis
+	char currYChar; //vertical / y axis
+
+	int countVal;
+
+//go through every character on the line
+	for (int i = 1; i < t->getWidth(); i++) {
+
+		currXChar = wordOne[i - 1];
+		currYChar = wordTwo[wordLine]; //check this later ****************************************************
+
+		//if the characters are the same, set the count to the diagonal + 1
+		//and the direction to diagonal
+		if (currXChar == currYChar) {
+
+			//get the count of the diagonal and add one
+			countVal = t->getCount(i - 1, tableLine - 1) + 1;
+
+			//set the count of the current cell
+			t->setCount(i, tableLine, countVal);
+
+			//set the direction of the current cell to diagonal
+			t->setDir(i, tableLine, 2);
+
+			//if the count of the cell above the current cell is greater than
+			//that of the cell to its left, set count to that of the above cell
+			//and set the direction to up
+		} else if (t->getCount(i, tableLine - 1)
+				>= t->getCount(i - 1, tableLine)) {
+
+			//get the count of the up cell
+			countVal = t->getCount(i, tableLine - 1);
+
+			//set the count of the current cell
+			t->setCount(i, tableLine, countVal);
+
+			//set the direction of the current cell to up
+			t->setDir(i, tableLine, 3);
+
+			//else set the count to that of the cell to the left and set the direction to left
+		} else {
+
+			//get the count of the left cell
+			countVal = t->getCount(i - 1, tableLine);
+
+			//set the count of the current cell
+			t->setCount(i, tableLine, countVal);
+
+			//set the direction of the current cell to left
+			t->setDir(i, tableLine, 1);
+		}
+	}
+
+} //end populateLine
+
+//
