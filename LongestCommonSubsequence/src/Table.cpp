@@ -42,36 +42,36 @@ Table::Table(string wordOne, string wordTwo, string mode) {
 			backtrack[i][j] = 0;
 		}
 	}
-}
+} //end Constructor
 
 Table::~Table() {
 	delete backtrack;
 	delete count;
-}
+} //end Deconstructor
 
 void Table::setCount(int x, int y, int countVal) {
 
 	//set the count at the coordinates (x,y) to countVal
 	count[x][y] = countVal;
-}
+} //end setCount
 
 int Table::getCount(int x, int y) {
 
 	//return the value of the countVal at coordinates (x,y)
 	return count[x][y];
-}
+} //end getCount
 
 void Table::setDir(int x, int y, int dirVal) {
 
 	//set the count at the coordinates (x,y) to countVal
 	backtrack[x][y] = dirVal;
-}
+} //end setDir
 
 int Table::getDir(int x, int y) {
 
 	//return the value of the dirVal at coordinates (x,y)
 	return backtrack[x][y];
-}
+} //end getDir
 
 void Table::populate(int x, int y, int countVal, int dirVal) {
 
@@ -79,20 +79,20 @@ void Table::populate(int x, int y, int countVal, int dirVal) {
 	count[x][y] = countVal;
 	backtrack[x][y] = dirVal;
 
-}
+} //end populate
 
 int Table::getWidth(){
 	return width;
-}
+} //end getWidth
 
 int Table::getHeight(){
 	return tableHeight;
-}
+} //end getHeight
 
 string Table::getOne(){
 	return wOne;
-}
+} //end getOne
 
 string Table::getTwo(){
 	return wTwo;
-}
+} //end getTwo
