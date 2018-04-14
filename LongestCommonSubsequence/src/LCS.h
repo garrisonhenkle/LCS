@@ -13,8 +13,11 @@
 
 class LCS {
 public:
-	void populateMatrix(Table&);
-	string getLCS(Table&);
+	void populateMatrix(Table*, string, string);
+	string getLCS(Table*, string);
+
+	void populateSwap(Table*, string, string);
+	int getLCSLength(Table*);
 };
 
 #endif /* LCS_H_ */
